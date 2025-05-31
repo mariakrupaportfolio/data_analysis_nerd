@@ -1,5 +1,5 @@
 git init
 git add .
 git commit -m "Initial portfolio website"
-git remote add origin https://github.com/mariakrupaportfolio/mariakrupaportfolio.git
+git remote add origin https://github.com/mariakrupaportfolio/data_analysis_nerd.git
 git push -u origin main
