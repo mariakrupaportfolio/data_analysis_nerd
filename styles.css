@@ -4,6 +4,7 @@
     --bg-color: #ffffff;
     --secondary-bg: #f3f4f6;
     --footer-bg: #1a237e;
+    --marble-color: rgba(37, 99, 235, 0.1);
 }
 
 * {
@@ -16,6 +17,34 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
     color: var(--text-color);
+    background: linear-gradient(135deg, var(--bg-color) 0%, var(--marble-color) 100%);
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(45deg, transparent 45%, var(--marble-color) 45%, var(--marble-color) 55%, transparent 55%),
+        linear-gradient(-45deg, transparent 45%, var(--marble-color) 45%, var(--marble-color) 55%, transparent 55%);
+    background-size: 30px 30px;
+    opacity: 0.4;
+    z-index: -1;
+    animation: marbleFlow 15s linear infinite;
+}
+
+@keyframes marbleFlow {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 60px 60px;
+    }
 }
 
 .container {
@@ -69,6 +98,37 @@ section {
     text-align: center;
     padding: 8rem 0;
     margin-top: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+#hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: 
+        linear-gradient(45deg, transparent 40%, var(--primary-color) 45%, transparent 50%),
+        linear-gradient(-45deg, transparent 40%, var(--primary-color) 45%, transparent 50%);
+    background-size: 60px 60px;
+    opacity: 0.1;
+    animation: heroMarble 20s linear infinite;
+}
+
+@keyframes heroMarble {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#hero .container {
+    position: relative;
+    z-index: 1;
 }
 
 #hero h2 {
