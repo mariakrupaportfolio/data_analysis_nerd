@@ -219,7 +219,27 @@ footer::before {
     background-size: 200px 200px;
     opacity: 0.4;
     z-index: 1;
-    animation: twinkle 4s ease-in-out infinite alternate;
+    animation: twinkle1 3s ease-in-out infinite;
+}
+
+footer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 100px;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(1px 1px at 150px 50px, white 50%, transparent 100%),
+        radial-gradient(1px 1px at 70px 90px, white 50%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 110px 60px, white 50%, transparent 100%),
+        radial-gradient(1px 1px at 30px 100px, white 50%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 180px 140px, white 50%, transparent 100%);
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0.4;
+    z-index: 1;
+    animation: twinkle2 4s ease-in-out infinite;
 }
 
 footer .container {
@@ -232,13 +252,14 @@ footer p {
     opacity: 0.9;
 }
 
-@keyframes twinkle {
-    0% {
-        opacity: 0.4;
-    }
-    100% {
-        opacity: 0.7;
-    }
+@keyframes twinkle1 {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes twinkle2 {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 0.4; }
 }
 
 /* Responsive Design */
