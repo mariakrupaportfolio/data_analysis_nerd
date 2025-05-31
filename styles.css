@@ -3,6 +3,7 @@
     --text-color: #1f2937;
     --bg-color: #ffffff;
     --secondary-bg: #f3f4f6;
+    --footer-bg: #1a237e;
 }
 
 * {
@@ -134,9 +135,50 @@ section {
 
 /* Footer */
 footer {
-    background-color: var(--secondary-bg);
-    padding: 2rem 0;
+    position: relative;
+    background: linear-gradient(to bottom, transparent, var(--footer-bg));
+    padding: 4rem 0 2rem;
     text-align: center;
+    overflow: hidden;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(1px 1px at 20px 30px, white 50%, transparent 100%),
+        radial-gradient(1px 1px at 40px 70px, white 50%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 90px 40px, white 50%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 130px 80px, white 50%, transparent 100%),
+        radial-gradient(1px 1px at 160px 120px, white 50%, transparent 100%);
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0.4;
+    z-index: 1;
+    animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+footer .container {
+    position: relative;
+    z-index: 2;
+}
+
+footer p {
+    color: white;
+    opacity: 0.9;
+}
+
+@keyframes twinkle {
+    0% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 0.7;
+    }
 }
 
 /* Responsive Design */
@@ -154,4 +196,3 @@ footer {
         padding: 6rem 0;
     }
 }
-
