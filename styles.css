@@ -83,11 +83,35 @@ section {
     margin-top: 2rem;
 }
 
+.project-visualization {
+    margin: 1.5rem 0;
+    width: 100%;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
 .project-card {
     background-color: var(--bg-color);
     border-radius: 0.5rem;
     padding: 1.5rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.project-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.project-card p {
+    margin-bottom: 1rem;
+}
+
+.flourish-embed {
+    width: 100%;
+    min-height: 600px;
+    border: none;
 }
 
 /* Contact */
@@ -130,3 +154,4 @@ footer {
         padding: 6rem 0;
     }
 }
+
