@@ -5,6 +5,7 @@
     --secondary-bg: #f3f4f6;
     --footer-bg: #1a237e;
     --marble-color: rgba(37, 99, 235, 0.1);
+    --accent-color: #ff725c;
 }
 
 * {
@@ -34,6 +35,7 @@ body::before {
         linear-gradient(-45deg, transparent 45%, var(--marble-color) 45%, var(--marble-color) 55%, transparent 55%);
     background-size: 30px 30px;
     opacity: 0.4;
+    opacity: 0.15;
     z-index: -1;
     animation: marbleFlow 15s linear infinite;
 }
@@ -51,6 +53,11 @@ body::before {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
+}
+
+h2, h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
 }
 
 /* Navigation */
@@ -86,6 +93,13 @@ nav a {
 
 nav a:hover {
     color: var(--primary-color);
+nav a:hover,
+nav a.active {
+    color: var(--accent-color);
+}
+
+nav a.active {
+    border-bottom: 2px solid var(--accent-color);
 }
 
 /* Sections */
@@ -111,31 +125,7 @@ section {
     height: 200%;
     background-image: 
         linear-gradient(45deg, transparent 40%, var(--primary-color) 45%, transparent 50%),
-        linear-gradient(-45deg, transparent 40%, var(--primary-color) 45%, transparent 50%);
-    background-size: 60px 60px;
-    opacity: 0.1;
-    animation: heroMarble 20s linear infinite;
-}
-
-@keyframes heroMarble {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-#hero .container {
-    position: relative;
-    z-index: 1;
-}
-
-#hero h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
-
+@@ -139,80 +150,80 @@ section {
 /* Projects */
 .project-grid {
     display: grid;
@@ -162,6 +152,7 @@ section {
 
 .project-card h3 {
     color: var(--primary-color);
+    color: var(--accent-color);
     margin-bottom: 1rem;
 }
 
@@ -191,6 +182,7 @@ section {
 
 .social-links a:hover {
     color: var(--primary-color);
+    color: var(--accent-color);
 }
 
 /* Footer */
@@ -216,64 +208,3 @@ footer::before {
         radial-gradient(1.5px 1.5px at 130px 80px, white 50%, transparent 100%),
         radial-gradient(1px 1px at 160px 120px, white 50%, transparent 100%);
     background-repeat: repeat;
-    background-size: 200px 200px;
-    opacity: 0.4;
-    z-index: 1;
-    animation: twinkle1 3s ease-in-out infinite;
-}
-
-footer::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 100px;
-    right: 0;
-    bottom: 0;
-    background-image: 
-        radial-gradient(1px 1px at 150px 50px, white 50%, transparent 100%),
-        radial-gradient(1px 1px at 70px 90px, white 50%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 110px 60px, white 50%, transparent 100%),
-        radial-gradient(1px 1px at 30px 100px, white 50%, transparent 100%),
-        radial-gradient(1.5px 1.5px at 180px 140px, white 50%, transparent 100%);
-    background-repeat: repeat;
-    background-size: 200px 200px;
-    opacity: 0.4;
-    z-index: 1;
-    animation: twinkle2 4s ease-in-out infinite;
-}
-
-footer .container {
-    position: relative;
-    z-index: 2;
-}
-
-footer p {
-    color: white;
-    opacity: 0.9;
-}
-
-@keyframes twinkle1 {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 0.7; }
-}
-
-@keyframes twinkle2 {
-    0%, 100% { opacity: 0.7; }
-    50% { opacity: 0.4; }
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .nav-content {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    nav ul {
-        gap: 1rem;
-    }
-
-    #hero {
-        padding: 6rem 0;
-    }
-}
