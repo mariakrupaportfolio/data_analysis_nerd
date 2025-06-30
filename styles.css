@@ -5,6 +5,7 @@
     --secondary-bg: #f3f4f6;
     --footer-bg: #1a237e;
     --marble-color: rgba(37, 99, 235, 0.1);
+    --accent-color: #ff725c;
 }
 
 * {
@@ -33,7 +34,7 @@ body::before {
         linear-gradient(45deg, transparent 45%, var(--marble-color) 45%, var(--marble-color) 55%, transparent 55%),
         linear-gradient(-45deg, transparent 45%, var(--marble-color) 45%, var(--marble-color) 55%, transparent 55%);
     background-size: 30px 30px;
-    opacity: 0.4;
+    opacity: 0.15;
     z-index: -1;
     animation: marbleFlow 15s linear infinite;
 }
@@ -51,6 +52,11 @@ body::before {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
+}
+
+h2, h3 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
 }
 
 /* Navigation */
@@ -84,8 +90,13 @@ nav a {
     font-weight: 500;
 }
 
-nav a:hover {
-    color: var(--primary-color);
+nav a:hover,
+nav a.active {
+    color: var(--accent-color);
+}
+
+nav a.active {
+    border-bottom: 2px solid var(--accent-color);
 }
 
 /* Sections */
@@ -161,7 +172,7 @@ section {
 }
 
 .project-card h3 {
-    color: var(--primary-color);
+    color: var(--accent-color);
     margin-bottom: 1rem;
 }
 
@@ -190,7 +201,7 @@ section {
 }
 
 .social-links a:hover {
-    color: var(--primary-color);
+    color: var(--accent-color);
 }
 
 /* Footer */
