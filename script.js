@@ -27,3 +27,23 @@ window.addEventListener('scroll', () => {
         }
     });
 });
+
+// Randomly scatter stickers in the background
+window.addEventListener('DOMContentLoaded', () => {
+    const stickerUrls = [
+        'https://example.com/sticker1.png',
+        'https://example.com/sticker2.png',
+        'https://example.com/sticker3.png'
+    ];
+    const numStickers = 10;
+    for (let i = 0; i < numStickers; i++) {
+        const sticker = document.createElement('div');
+        sticker.classList.add('sticker');
+        const url = stickerUrls[i % stickerUrls.length];
+        sticker.style.backgroundImage = `url('${url}')`;
+        sticker.style.top = Math.random() * 100 + '%';
+        sticker.style.left = Math.random() * 100 + '%';
+        sticker.style.transform = `translate(-50%, -50%) rotate(${Math.random()*360}deg)`;
+        document.body.appendChild(sticker);
+    }
+});
