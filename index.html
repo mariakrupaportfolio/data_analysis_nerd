@@ -1,152 +1,449 @@
-er<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maria Krupa - Data Analysis Portfolio</title>
-    <link rel="stylesheet" href="index.html">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>~*~ Maria Krupa ~*~ Data Nerd & Geek ~*~</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:#000000;--teal:#008080;--lime:#00ff00;--fuchsia:#ff00ff;
+    --yellow:#ffff00;--cyan:#00ffff;--silver:#c0c0c0;--navy:#000080;
+    --white:#ffffff;--purple:#800080;--bg:#000011;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    background-color:var(--bg);
+    background-image:
+      radial-gradient(circle,rgba(255,255,255,0.8) 1px,transparent 1px),
+      radial-gradient(circle,rgba(255,255,255,0.4) 1px,transparent 1px),
+      radial-gradient(circle,rgba(255,255,255,0.6) 1px,transparent 1px);
+    background-size:200px 200px,150px 150px,100px 100px;
+    background-position:0 0,75px 75px,25px 25px;
+    font-family:'Courier Prime',monospace;
+    color:var(--white);min-height:100vh;overflow-x:hidden;
+  }
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+  @keyframes rainbow{0%{background-position:0%}100%{background-position:200%}}
+  @keyframes marq{from{transform:translateX(100vw)}to{transform:translateX(-100%)}}
+  @keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+  .blink{animation:blink 1s step-start infinite;}
+
+  .marquee-bar{background:var(--black);border-bottom:2px solid var(--lime);border-top:2px solid var(--lime);padding:4px 0;overflow:hidden;position:sticky;top:0;z-index:999;}
+  .marquee-inner{display:inline-block;white-space:nowrap;animation:marq 22s linear infinite;font-family:'VT323',monospace;font-size:18px;color:var(--lime);letter-spacing:0.05em;}
+  .marquee-inner span{color:var(--fuchsia);}
+
+  .container{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:0 12px 40px;}
+
+  header{text-align:center;padding:32px 0 20px;border-bottom:3px double var(--teal);}
+  .site-title{font-family:'VT323',monospace;font-size:clamp(38px,7vw,72px);line-height:1;background:linear-gradient(90deg,var(--fuchsia),var(--cyan),var(--yellow),var(--fuchsia));background-size:200%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:rainbow 3s linear infinite;}
+  .site-subtitle{font-family:'VT323',monospace;font-size:22px;color:var(--cyan);margin-top:6px;letter-spacing:0.1em;}
+  .visitor-bar{display:flex;justify-content:center;align-items:center;gap:16px;padding:8px 0;font-family:'VT323',monospace;font-size:16px;color:var(--silver);flex-wrap:wrap;}
+  .counter{font-family:'Press Start 2P',monospace;font-size:11px;color:var(--lime);background:var(--black);border:2px inset var(--silver);padding:4px 8px;letter-spacing:0.1em;}
+
+  nav{display:flex;justify-content:center;gap:0;margin:16px 0;flex-wrap:wrap;}
+  nav a{font-family:'VT323',monospace;font-size:20px;text-decoration:none;color:var(--white);background:var(--navy);border:2px outset var(--silver);padding:4px 16px;letter-spacing:0.05em;transition:all 0.1s;display:inline-block;}
+  nav a:hover{background:var(--teal);border-style:inset;color:var(--yellow);}
+
+  .layout{display:grid;grid-template-columns:180px 1fr;gap:12px;margin-top:16px;align-items:start;}
+  .sidebar{display:flex;flex-direction:column;gap:10px;}
+  .sidebar-box{border:2px solid var(--teal);background:rgba(0,0,128,0.4);}
+  .sidebar-box-title{background:var(--teal);color:var(--black);font-family:'VT323',monospace;font-size:16px;padding:2px 8px;letter-spacing:0.05em;font-weight:bold;}
+  .sidebar-box-body{padding:8px;font-family:'VT323',monospace;font-size:16px;line-height:1.6;}
+  .sidebar-box-body a{color:var(--cyan);text-decoration:underline;display:block;font-size:15px;}
+  .sidebar-box-body a:hover{color:var(--yellow);}
+
+  .avatar-box{border:3px ridge var(--fuchsia);background:var(--black);padding:8px;text-align:center;}
+  canvas#avatar{display:block;margin:0 auto 4px;image-rendering:pixelated;image-rendering:crisp-edges;}
+  .avatar-name{font-family:'VT323',monospace;font-size:15px;color:var(--fuchsia);}
+  .avatar-caption{font-family:'VT323',monospace;font-size:11px;color:var(--teal);margin-top:1px;}
+
+  .now-playing{font-size:13px;color:var(--lime);font-family:'VT323',monospace;line-height:1.6;}
+  .now-playing span{color:var(--fuchsia);}
+
+  .main-content{display:flex;flex-direction:column;gap:12px;}
+  .win{border:2px solid var(--silver);background:rgba(0,0,20,0.85);}
+  .win-titlebar{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(90deg,var(--navy),var(--teal));padding:2px 6px;}
+  .win-title{font-family:'VT323',monospace;font-size:17px;color:var(--white);letter-spacing:0.04em;}
+  .win-btns{display:flex;gap:3px;}
+  .win-btn{width:14px;height:14px;border:1px outset var(--silver);background:var(--silver);font-family:'VT323',monospace;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--black);line-height:1;padding:0;flex-shrink:0;}
+  .win-btn:hover{background:var(--white);}
+  .win-body{padding:12px 14px;font-size:14px;line-height:1.75;color:var(--silver);}
+  .win-body h2{font-family:'VT323',monospace;font-size:24px;color:var(--cyan);margin-bottom:8px;letter-spacing:0.05em;}
+  .win-body p{margin-bottom:10px;}
+  .highlight{color:var(--yellow);font-weight:bold;}
+  .hl-pink{color:var(--fuchsia);}
+  .hl-green{color:var(--lime);}
+  .hl-cyan{color:var(--cyan);}
+
+  .project-card{border:1px solid var(--teal);background:rgba(0,128,128,0.08);padding:10px 12px;margin-bottom:10px;position:relative;transition:background 0.15s;}
+  .project-card:hover{background:rgba(0,128,128,0.18);}
+  .project-card::before{content:'▶';color:var(--fuchsia);position:absolute;left:-14px;top:10px;font-size:11px;}
+  .project-title{font-family:'VT323',monospace;font-size:20px;color:var(--cyan);margin-bottom:4px;}
+  .project-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px;}
+  .ptag{font-family:'VT323',monospace;font-size:13px;padding:1px 7px;border:1px solid var(--purple);color:var(--fuchsia);background:rgba(128,0,128,0.2);}
+  .ptag.green{border-color:var(--lime);color:var(--lime);background:rgba(0,255,0,0.08);}
+  .ptag.cyan{border-color:var(--cyan);color:var(--cyan);background:rgba(0,255,255,0.08);}
+  .project-finding{font-size:13px;color:var(--lime);border-left:3px solid var(--lime);padding-left:8px;margin-top:6px;font-style:italic;}
+
+  .stats-table{width:100%;border-collapse:collapse;font-family:'VT323',monospace;font-size:17px;margin-top:8px;}
+  .stats-table th{text-align:left;color:var(--teal);border-bottom:1px solid var(--teal);padding:3px 8px;font-weight:bold;}
+  .stats-table td{padding:4px 8px;color:var(--silver);border-bottom:1px dotted rgba(0,128,128,0.3);}
+  .stats-table td:last-child{color:var(--lime);text-align:right;}
+  .stats-table tr:hover td{color:var(--white);background:rgba(0,128,128,0.1);}
+
+  .divider{text-align:center;color:var(--teal);font-family:'VT323',monospace;font-size:18px;margin:4px 0;}
+  .guestbook-entry{border-left:3px solid var(--fuchsia);padding:6px 10px;margin-bottom:8px;}
+  .gb-name{color:var(--fuchsia);font-family:'VT323',monospace;font-size:17px;}
+  .gb-text{color:var(--silver);font-size:13px;line-height:1.5;}
+  .gb-date{color:var(--teal);font-size:12px;font-family:'VT323',monospace;}
+
+  .badge-row{display:flex;flex-wrap:wrap;gap:4px;padding:8px 10px;}
+  .badge{font-family:'Press Start 2P',monospace;font-size:7px;padding:4px 7px;border:1px solid;letter-spacing:0.05em;display:inline-flex;align-items:center;line-height:1.4;}
+  .badge-netscape{background:#666;border-color:#999;color:#fff;}
+  .badge-wc3{background:#005a9c;border-color:#4da6ff;color:#fff;}
+  .badge-best{background:#cc0000;border-color:#ff6666;color:#fff;}
+  .badge-y2k{background:#006600;border-color:#00ff00;color:#00ff00;}
+
+  .uc-bar{display:flex;align-items:center;gap:10px;padding:6px 10px;background:rgba(255,255,0,0.05);border:1px dashed var(--yellow);font-family:'VT323',monospace;font-size:17px;color:var(--yellow);}
+  .uc-icon{font-size:22px;animation:spin 2s linear infinite;display:inline-block;}
+
+  .contact-table{width:100%;font-family:'VT323',monospace;font-size:18px;border-collapse:collapse;}
+  .contact-table td{padding:5px 8px;border-bottom:1px dotted rgba(0,128,128,0.25);vertical-align:top;}
+  .contact-table td:first-child{color:var(--teal);width:100px;white-space:nowrap;}
+  .contact-table a{color:var(--cyan);text-decoration:underline;}
+  .contact-table a:hover{color:var(--yellow);}
+
+  footer{text-align:center;padding:20px 0 10px;border-top:3px double var(--teal);margin-top:20px;}
+  .footer-text{font-family:'VT323',monospace;font-size:16px;color:var(--silver);line-height:1.8;}
+  .footer-copy{color:var(--teal);font-size:14px;margin-top:8px;}
+
+  .cursor-dot{position:fixed;width:6px;height:6px;border-radius:0;pointer-events:none;z-index:9999;transition:opacity 0.5s;}
+  @media(max-width:600px){.layout{grid-template-columns:1fr;}.project-card::before{display:none;}}
+</style>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="nav-content">
-                <h1>Maria Krupa</h1>
-                <ul>
-                    <li><a href="#about">About</a></li>er<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maria Krupa - Data Analysis Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <div class="nav-content">
-                <h1>Maria Krupa</h1>
-                <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
 
-    <main>
-        <section id="hero">
-            <div class="container">
-                <h2>Hello There, Welcome to my Portfolio</h2>
-                <p>Data Analyst, Creator & Geek in one!</p>
-            </div>
-        </section>
+<div class="marquee-bar">
+  <div class="marquee-inner">
+    ✦ Welcome to Maria's Homepage ✦ &nbsp;
+    <span>★ Data Analyst ★ Creator ★ Geek ★</span>
+    &nbsp; ✦ Best viewed in 800x600 resolution ✦ &nbsp;
+    <span>☆ Honkai: Star Rail enthusiast ☆</span>
+    &nbsp; ✦ Born 1997 ✦ Copenhagen ✦ &nbsp;
+    <span>★ Last updated: today ★</span>
+    &nbsp; ✦ Welcome to Maria's Homepage ✦ &nbsp;
+    <span>★ Data Analyst ★ Creator ★ Geek ★</span>
+    &nbsp; ✦ Best viewed in 800x600 resolution ✦
+  </div>
+</div>
 
-        <section id="about">
-            <div class="container">
-                <h2>About Me</h2>
-                <p>I am a passionate Data Analyst with desire to explore the unknown and untangle the messy data. Why? Because numbers hide patterns, stories and strategy to acheive dreams. I worked 5+ years with marketing and 2+ years with heavy focus on data analysis within the marketing efforts. But, I'm also someone with interests like video games, hence you will not only stumble upon things I work with, but a lot of my little passion projects. </p>
-            </div>
-        </section>
+<div class="container">
+  <header>
+    <div class="site-title">~*~ Maria Krupa ~*~</div>
+    <div class="site-subtitle">✧ Data Nerd &amp; Geek Extraordinaire ✧ <span class="blink">▌</span></div>
+    <div class="visitor-bar">
+      <span>You are visitor #</span>
+      <span class="counter" id="visCount">001,337</span>
+      <span>since Jan 1997</span>
+    </div>
+    <nav>
+      <a href="#about">[ About ]</a>
+      <a href="#projects">[ Projects ]</a>
+      <a href="#stats">[ Stats ]</a>
+      <a href="#guestbook">[ Guestbook ]</a>
+      <a href="#contact">[ Contact ]</a>
+    </nav>
+  </header>
 
-        <section id="projects">
-            <div class="container">
-                <h2>My Projects</h2>
-                <div class="project-grid">
-                    <div class="project-card">
-                        <h3>HSR Sales Analysis & Potential with Future Characters</h3>
-                        <p>Interactive data visualization showcasing analytical insights, research adn my thoughts on what's going on with HSR.</p>
-                        <div class="project-visualization">
-                            <div class="flourish-embed" data-src="story/3070663">
-                                <script src="https://public.flourish.studio/resources/embed.js"></script>
-                                <noscript><img src="https://public.flourish.studio/story/3070663/thumbnail" width="100%" alt="Data Visualization" /></noscript>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <div class="layout">
+    <aside class="sidebar">
 
-        <section id="contact">
-            <div class="container">
-                <h2>Contact Me</h2>
-                <div class="social-links">
-                    <a href="https://github.com/mariakrupaportfolio/data_analysis_nerd" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/maria-krupa-/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </section>
-    </main>
+      <div class="avatar-box">
+        <canvas id="avatar" width="80" height="100"></canvas>
+        <div class="avatar-name">~mariadata~</div>
+        <div class="avatar-caption">w/ Caine ✦</div>
+      </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Maria Krupa. All rights reserved.</p>
+      <div class="sidebar-box">
+        <div class="sidebar-box-title">♫ NOW PLAYING</div>
+        <div class="sidebar-box-body">
+          <div class="now-playing">
+            ► <span>some metal track</span><br>
+            ◈ mood: focused<br>
+            ◈ bouldering later<br>
+            ◈ hsr: endgame grind
+          </div>
         </div>
-    </footer>
+      </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
-
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <section id="hero">
-            <div class="container">
-                <h2>Hello There, Welcome to my Portfolio</h2>
-                <p>Data Analyst, Creator & Geek in one!</p>
-            </div>
-        </section>
-
-        <section id="about">
-            <div class="container">
-                <h2>About Me</h2>
-                <p>I am a passionate Data Analyst with desire to explore the unknown and untangle the messy data. Why? Because numbers hide patterns, stories and strategy to acheive dreams. I worked 5+ years with marketing and 2+ years with heavy focus on data analysis within the marketing efforts. But, I'm also someone with interests like video games, hence you will not only stumble upon things I work with, but a lot of my little passion projects. </p>
-            </div>
-        </section>
-
-        <section id="projects">
-            <div class="container">
-                <h2>My Projects</h2>
-                <div class="project-grid">
-                    <div class="project-card">
-                        <h3>HSR Sales Analysis & Potential with Future Characters</h3>
-                        <p>Interactive data visualization showcasing analytical insights, research adn my thoughts on what's going on with HSR.</p>
-                        <div class="project-visualization">
-                            <div class="flourish-embed" data-src="story/3070663">
-                                <script src="https://public.flourish.studio/resources/embed.js"></script>
-                                <noscript><img src="https://public.flourish.studio/story/3070663/thumbnail" width="100%" alt="Data Visualization" /></noscript>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <div class="container">
-                <h2>Contact Me</h2>
-                <div class="social-links">
-                    <a href="https://github.com/mariakrupaportfolio/data_analysis_nerd" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/maria-krupa-/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Maria Krupa. All rights reserved.</p>
+      <div class="sidebar-box">
+        <div class="sidebar-box-title">☆ ABOUT ME</div>
+        <div class="sidebar-box-body" style="font-size:14px;line-height:1.6">
+          <span style="color:var(--fuchsia)">Name:</span> Maria<br>
+          <span style="color:var(--fuchsia)">Age:</span> 28 (born 1997)<br>
+          <span style="color:var(--fuchsia)">City:</span> Copenhagen<br>
+          <span style="color:var(--fuchsia)">Mood:</span> <span class="blink" style="color:var(--lime)">✦</span> curious<br>
+          <span style="color:var(--fuchsia)">MSc:</span> Medialogy<br>
+          <span style="color:var(--fuchsia)">Art:</span> lurking in the<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;internet shadows
         </div>
-    </footer>
+      </div>
 
-    <script src="script.js"></script>
+      <div class="sidebar-box">
+        <div class="sidebar-box-title">◈ MY LINKS</div>
+        <div class="sidebar-box-body">
+          <a href="https://github.com/mariakrupaportfolio" target="_blank">→ GitHub</a>
+          <a href="https://www.linkedin.com/in/maria-krupa-/" target="_blank">→ LinkedIn</a>
+          <a href="#" target="_blank">→ Flourish Viz</a>
+        </div>
+      </div>
+
+      <div class="sidebar-box">
+        <div class="sidebar-box-title">◎ BADGES</div>
+        <div class="badge-row">
+          <span class="badge badge-netscape">Netscape Now!</span>
+          <span class="badge badge-wc3">W3C Valid</span>
+          <span class="badge badge-best">Best Viewed</span>
+          <span class="badge badge-y2k">Y2K Ready</span>
+        </div>
+      </div>
+
+    </aside>
+
+    <main class="main-content">
+
+      <div class="win" id="about">
+        <div class="win-titlebar">
+          <span class="win-title">📁 about_me.txt — Notepad</span>
+          <div class="win-btns"><div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn" style="background:#cc0000;color:white">✕</div></div>
+        </div>
+        <div class="win-body">
+          <h2>Hello There, Welcome to my Portfolio!</h2>
+          <p>I'm a <span class="highlight">Data Analyst, Creator &amp; Geek in one</span>! Born in <span class="hl-pink">1997</span> — same year the internet was figuring itself out — and I've been making sense of messy systems ever since.</p>
+          <p>I work with <span class="hl-green">numbers that hide patterns, stories, and strategy</span>. 5+ years in marketing, 2+ years deep in data analysis. I built 31+ dashboards in Looker Studio &amp; Flourish. I hit 1M DKK in ticket sales ahead of schedule. I've spoken at <span class="hl-cyan">Marketing Connect</span> and attended SLUSH Helsinki.</p>
+          <p>Also: I draw, animate, boulder on weekends, and I have an embarrassingly detailed knowledge of Honkai: Star Rail lore. <span style="color:var(--teal)">The art stuff stays in the shadows.</span> I contain multitudes.</p>
+          <div class="uc-bar">
+            <span class="uc-icon">⚙</span>
+            <span>This page is always under construction — just like any good data pipeline!</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="win" id="projects">
+        <div class="win-titlebar">
+          <span class="win-title">📊 my_projects — Explorer</span>
+          <div class="win-btns"><div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn" style="background:#cc0000;color:white">✕</div></div>
+        </div>
+        <div class="win-body">
+          <h2>My Projects</h2>
+          <div class="project-card">
+            <div class="project-title">⊞ HSR Sales Analysis &amp; Future Characters</div>
+            <div class="project-tags"><span class="ptag">Flourish</span><span class="ptag green">Data Viz</span><span class="ptag cyan">Passion Project</span></div>
+            <p style="font-size:13px;color:var(--silver)">Interactive data visualization showcasing analytical insights, research and my thoughts on what's going on with HSR. Because yes, you can be a serious data analyst AND care deeply about gacha games.</p>
+            <div class="project-finding">→ <a href="https://public.flourish.studio/story/3070663/" target="_blank" style="color:var(--lime)">View on Flourish ↗</a></div>
+          </div>
+          <div class="project-card">
+            <div class="project-title">⊞ TechBBQ Startup Retention Study</div>
+            <div class="project-tags"><span class="ptag cyan">SQL</span><span class="ptag">8 Years Data</span><span class="ptag green">Nordic Ecosystem</span></div>
+            <p style="font-size:13px;color:var(--silver)">Multi-CTE SQL pipeline across 10,000+ attendee records. 8 years of conference data turned into one finding about the Nordic startup ecosystem.</p>
+            <div class="project-finding">"1 in 10 startups from 2018 returned every year." — discovered via SQL</div>
+          </div>
+          <div class="project-card">
+            <div class="project-title">⊞ Revenue Acceleration — 1M DKK</div>
+            <div class="project-tags"><span class="ptag green">Growth</span><span class="ptag">Email</span><span class="ptag cyan">758% YoY</span></div>
+            <p style="font-size:13px;color:var(--silver)">Redesigned the ticket sales pipeline from scratch. 91 tickets sold within 24 hours from a single email campaign. 1M DKK in ticket revenue hit two months ahead of prior year.</p>
+            <div class="project-finding">"758% YoY revenue growth in February." — I did that with a spreadsheet and a really good subject line.</div>
+          </div>
+          <div class="project-card">
+            <div class="project-title">⊞ Python Contact Scraper</div>
+            <div class="project-tags"><span class="ptag">Python</span><span class="ptag cyan">Automation</span><span class="ptag green">Slush · VivaTech</span></div>
+            <p style="font-size:13px;color:var(--silver)">Scraper extracting company contact &amp; leadership data from conference attendee lists. Presented as "Solo &amp; Scrappy" tooling at the Show Your Setup event.</p>
+          </div>
+          <div class="project-card">
+            <div class="project-title">⊞ TechBBQ Speaker Archive (React)</div>
+            <div class="project-tags"><span class="ptag cyan">React</span><span class="ptag">Vercel</span><span class="ptag green">2018–2025</span></div>
+            <p style="font-size:13px;color:var(--silver)">Interactive speaker archive with year-pip indicators, search &amp; filter, CSV import. Built solo, deployed on Vercel, fully public.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="win" id="stats">
+        <div class="win-titlebar">
+          <span class="win-title">📈 achievements.xls — Excel 97</span>
+          <div class="win-btns"><div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn" style="background:#cc0000;color:white">✕</div></div>
+        </div>
+        <div class="win-body">
+          <h2>Stats &amp; Achievements</h2>
+          <table class="stats-table">
+            <tr><th>Achievement</th><th>Number</th></tr>
+            <tr><td>Dashboards built</td><td>31+</td></tr>
+            <tr><td>YoY revenue growth (Feb)</td><td>758%</td></tr>
+            <tr><td>Tickets sold in 24 hours (one email)</td><td>91</td></tr>
+            <tr><td>DKK ticket revenue hit ahead of schedule</td><td>1,000,000</td></tr>
+            <tr><td>Speaker at Marketing Connect</td><td>✦ yes</td></tr>
+            <tr><td>Years of conference data analysed</td><td>8</td></tr>
+            <tr><td>App Store rating improved (UX redesign)</td><td>4.1 → 4.5</td></tr>
+            <tr><td>Data analysis course students (ReDI)</td><td>growing ✦</td></tr>
+          </table>
+          <div class="divider" style="margin-top:10px">— ✦ ✦ ✦ —</div>
+          <div style="font-family:'VT323',monospace;font-size:14px;color:var(--teal);margin-top:6px">
+            ◈ Springer-published thesis &nbsp;|&nbsp; ◈ MSc Medialogy, Aalborg University &nbsp;|&nbsp; ◈ Est. market value: 480–550k DKK
+          </div>
+        </div>
+      </div>
+
+      <div class="win" id="guestbook">
+        <div class="win-titlebar">
+          <span class="win-title">📝 guestbook.cgi — Sign my guestbook!</span>
+          <div class="win-btns"><div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn" style="background:#cc0000;color:white">✕</div></div>
+        </div>
+        <div class="win-body">
+          <h2>Guestbook ✍</h2>
+          <div class="guestbook-entry">
+            <div class="gb-name">data_sampo_fan</div>
+            <div class="gb-text">ur SQL skills are actually insane, how did u find the retention pattern no one else saw?? 🔥</div>
+            <div class="gb-date">March 2025 · Copenhagen</div>
+          </div>
+          <div class="guestbook-entry">
+            <div class="gb-name">ReDI_student_01</div>
+            <div class="gb-text">best first class ever, the part about data storytelling actually made sense thank u!!!</div>
+            <div class="gb-date">Feb 2025 · Copenhagen</div>
+          </div>
+          <div class="guestbook-entry">
+            <div class="gb-name">nordic_vc_anon</div>
+            <div class="gb-text">came for the HSR analysis, stayed for the TechBBQ insights. absolute W portfolio.</div>
+            <div class="gb-date">Jan 2025 · Helsinki</div>
+          </div>
+          <div style="text-align:right;margin-top:8px">
+            <a href="#contact" style="font-family:'VT323',monospace;font-size:16px;color:var(--fuchsia);text-decoration:underline">[ ✉ Sign my guestbook! ]</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="win" id="contact">
+        <div class="win-titlebar">
+          <span class="win-title">📬 contact.htm</span>
+          <div class="win-btns"><div class="win-btn">_</div><div class="win-btn">□</div><div class="win-btn" style="background:#cc0000;color:white">✕</div></div>
+        </div>
+        <div class="win-body">
+          <h2>Contact Me</h2>
+          <table class="contact-table">
+            <tr><td>GitHub</td><td><a href="https://github.com/mariakrupaportfolio" target="_blank">mariakrupaportfolio</a></td></tr>
+            <tr><td>LinkedIn</td><td><a href="https://www.linkedin.com/in/maria-krupa-/" target="_blank">Maria Krupa</a></td></tr>
+            <tr><td>Location</td><td>Copenhagen, DK 🇩🇰</td></tr>
+            <tr><td>Art</td><td><span style="color:var(--teal)">lurking in the internet shadows 👁</span></td></tr>
+            <tr><td>Status</td><td><span class="blink" style="color:var(--lime)">●</span> <span style="color:var(--lime)">open to new roles</span></td></tr>
+          </table>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <footer>
+    <div class="footer-text">
+      ~*~ © 1997–2025 Maria Krupa ~*~ All rights reserved ~*~<br>
+      <span style="color:var(--fuchsia)">Best viewed in Netscape Navigator 4.0 at 800×600</span><br>
+      <span style="color:var(--teal)">No frames. No Flash. Just vibes and SQL.</span>
+    </div>
+    <div class="footer-copy">
+      <span class="blink">★</span> Made with ♥ and excessive amounts of coffee in Copenhagen <span class="blink">★</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+// ── CAINE pixel art ──────────────────────────────────────────────
+const S = 5;
+const cv = document.getElementById('avatar');
+const cx = cv.getContext('2d');
+cv.width  = 16 * S;
+cv.height = 20 * S;
+
+const C = {
+  _:'transparent',
+  K:'#1a0010',
+  P:'#9b3dbd',
+  L:'#c96be8',
+  D:'#5a1a7a',
+  H:'#2a1a3a',
+  T:'#f5e020',
+  W:'#f8f4ee',
+  G:'#d4c8b8',
+  R:'#e03060',
+  I:'#ff85b0',
+  E:'#f8f8ff',
+  B:'#3399ff',
+  U:'#001166',
+  S:'#ffffff',
+  X:'#dddddd',
+};
+
+const G = [
+  ['_','_','_','K','K','K','K','K','K','K','K','K','K','_','_','_'],
+  ['_','_','K','H','H','H','H','H','H','H','H','H','H','K','_','_'],
+  ['_','_','K','H','H','K','H','H','H','H','K','H','H','K','_','_'],
+  ['_','K','T','T','T','T','T','T','T','T','T','T','T','T','K','_'],
+  ['K','P','P','P','P','P','P','P','P','P','P','P','P','P','P','K'],
+  ['_','K','P','P','P','P','P','P','P','P','P','P','P','P','K','_'],
+  ['_','K','L','P','E','E','P','P','P','P','E','E','P','L','K','_'],
+  ['_','K','P','P','B','B','K','P','P','K','B','B','P','P','K','_'],
+  ['_','K','P','P','U','P','P','P','P','P','P','U','P','P','K','_'],
+  ['_','K','D','P','P','P','P','P','P','P','P','P','P','D','K','_'],
+  ['_','K','K','K','K','K','K','K','K','K','K','K','K','K','K','_'],
+  ['_','K','R','W','W','W','W','W','W','W','W','W','W','R','K','_'],
+  ['_','K','R','W','G','W','G','W','G','W','G','W','G','R','K','_'],
+  ['_','K','R','R','I','I','I','I','I','I','I','I','R','R','K','_'],
+  ['_','K','R','R','I','I','I','I','I','I','I','I','R','R','K','_'],
+  ['_','K','K','K','K','K','K','K','K','K','K','K','K','K','K','_'],
+  ['_','_','_','K','S','S','K','_','_','K','S','S','K','_','_','_'],
+  ['_','_','K','S','S','S','K','_','_','K','S','S','S','K','_','_'],
+  ['_','_','K','X','S','X','K','_','_','K','X','S','X','K','_','_'],
+  ['_','_','K','K','K','K','K','_','_','K','K','K','K','K','_','_'],
+];
+
+function drawCaine(eyeOpen) {
+  cx.clearRect(0, 0, cv.width, cv.height);
+  G.forEach((row, y) => {
+    row.forEach((v, x) => {
+      let col = v;
+      if (!eyeOpen && y >= 6 && y <= 8 && x >= 4 && x <= 5)  col = 'P';
+      if (!eyeOpen && y >= 6 && y <= 8 && x >= 10 && x <= 11) col = 'P';
+      if (!eyeOpen && y === 7 && (x===4||x===5||x===10||x===11)) col = 'K';
+      const fill = C[col];
+      if (!fill || fill === 'transparent') return;
+      cx.fillStyle = fill;
+      cx.fillRect(x * S, y * S, S, S);
+    });
+  });
+}
+
+drawCaine(true);
+setInterval(() => {
+  drawCaine(false);
+  setTimeout(() => drawCaine(true), 150);
+}, 3000 + Math.random() * 1500);
+
+// cursor trail
+const TC = ['#ff00ff','#00ffff','#ffff00','#00ff00','#ff6600'];
+let ti = 0;
+document.addEventListener('mousemove', e => {
+  const d = document.createElement('div');
+  d.className = 'cursor-dot';
+  d.style.left = e.clientX - 3 + 'px';
+  d.style.top  = e.clientY - 3 + 'px';
+  d.style.background = TC[ti++ % TC.length];
+  document.body.appendChild(d);
+  setTimeout(() => { d.style.opacity='0'; setTimeout(()=>d.remove(),500); }, 200);
+});
+
+// visitor counter
+let n = 1337;
+setInterval(() => {
+  n += Math.floor(Math.random() * 3);
+  const s = String(n).padStart(7,'0');
+  document.getElementById('visCount').textContent = s.slice(0,1)+','+s.slice(1,4)+','+s.slice(4);
+}, 4000);
+</script>
 </body>
 </html>
